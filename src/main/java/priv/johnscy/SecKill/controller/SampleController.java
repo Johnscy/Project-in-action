@@ -31,10 +31,24 @@ public class SampleController {
         return Result.success(user);
     }
 
+    @RequestMapping("/db/tx")
+    @ResponseBody
+    public Result<Boolean> dbTx() {
+        userService.tx();
+        return Result.success(true);
+    }
+
     @RequestMapping("/redis/get")
     @ResponseBody
     public Result<Long> redisGet(){
         Long v1 = redisService.get("key1",Long.class);
         return Result.success(v1);
+    }
+
+    @RequestMapping("/redis/set")
+    @ResponseBody
+    public Result<Boolean> redisSet(){
+        boolean v2 = redisService.set("key2","Hello,scy");
+        return Result.success(v2);
     }
 }
